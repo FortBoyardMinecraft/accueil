@@ -148,6 +148,47 @@
       color: white;
       background: #111;
     }
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px; /* largeur menu */
+  height: 100vh;
+  background-color: #222;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding-top: 60px; /* espace pour bouton */
+  transform: translateX(-260px); /* caché à gauche */
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.navbar.open {
+  transform: translateX(0);
+}
+
+.navbar button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  padding: 15px 20px;
+  text-align: left;
+  cursor: pointer;
+  border-bottom: 1px solid #444;
+}
+
+.tab-content {
+  padding: 20px;
+  margin-left: 0; /* pas de marge par défaut */
+  transition: margin-left 0.3s ease;
+}
+
+.tab-content.shifted {
+  margin-left: 250px; /* espace pour le menu ouvert */
+}
   </style>
 </head>
 <body>
@@ -160,13 +201,18 @@
     <h1>FBM - Mobile</h1>
   </header>
 
- <nav>
-    <a href="#" onclick="showTab('accueil')">Accueil</a>
-    <a href="#" onclick="showTab('presentation')">Présentation</a>
-    <a href="#" onclick="showTab('equipe')">L'équipe</a>
-    <a href="#" onclick="showTab('manifestations')">Événements</a>
-    <a href="contact2.html">Contact</a>
-  </nav>
+ <button id="menu-btn" aria-label="Ouvrir le menu" style="position: fixed; top: 10px; left: 10px; z-index: 1100; background: #222; color: white; border: none; font-size: 1.5rem; padding: 8px 12px; border-radius: 4px; cursor: pointer;">
+  ☰
+</button>
+
+<nav class="navbar">
+  <button class="nav-link active" data-target="accueil">Accueil</button>
+  <button class="nav-link" data-target="presentation">Présentation</button>
+  <button class="nav-link" data-target="equipe">L'équipe</button>
+  <button class="nav-link" data-target="manifestations">Manifestations</button>
+  <button class="nav-link" data-target="contact">Contact</button>
+</nav>
+
 
   <div id="accueil" class="tab-content active">
     <h2>Bienvenue</h2>
@@ -251,7 +297,26 @@ Le candidat va devoir retenir le chemin illuminé au sol pour pouvoir arriver ju
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.getElementById(id).classList.add('active');
     }
-  </script>
+
+  const menuBtn = document.getElementById('menu-btn');
+  const navbar = document.querySelector('.navbar');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  menuBtn.addEventListener('click', () => {
+    navbar.classList.toggle('open');
+
+    tabContents.forEach(tc => {
+      tc.classList.toggle('shifted');
+    });
+  });
+
+  // Optionnel : fermer le menu quand on clique sur un lien
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      navbar.classList.remove('open');
+      tabContents.forEach(tc => tc.classList.remove('shifted'));
+    });
+  });
 
   </script>
 </body>
