@@ -67,13 +67,18 @@
     }
 
     nav {
-      background: gray;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: gray;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    nav a {
+     nav a {
       padding: 1rem;
       color: white;
       text-decoration: none;
@@ -155,49 +160,91 @@
     <h1>FBM - Mobile</h1>
   </header>
 
-  <nav>
+ <nav>
     <a href="#" onclick="showTab('accueil')">Accueil</a>
     <a href="#" onclick="showTab('presentation')">Présentation</a>
     <a href="#" onclick="showTab('equipe')">L'équipe</a>
     <a href="#" onclick="showTab('manifestations')">Événements</a>
+    <a href="contact2.html">Contact</a>
   </nav>
 
   <div id="accueil" class="tab-content active">
     <h2>Bienvenue</h2>
-    <div class="grid-images">
-      <figure>
-        <img src="fort1.png" alt="fort1">
-        <figcaption>Vue du dessus</figcaption>
-      </figure>
-    </div>
+    <p>Retrouvez ici quelques visuels</p>
+
+   <div class="grid-images">
+    <figure style="text-align: center; margin-bottom: 2rem;">
+  <img src="fort1.png" alt="fort1" style="width:100%; max-width:400px;">
+  <figcaption>Vue du dessus</figcaption>
+</figure>
+
+<figure style="text-align: center;">
+  <img src="adf.png" alt="adf" style="width:100%; max-width:400px;">
+  <figcaption>Pour démarrer L'aventure , les candidats vont devoir escalader la façade du fort , intégrer la vigie et répondre à l'énigme du Père Fouras pour pouvoir ouvrir la porte principale et démarrer la quête des clés !</figcaption>
+</figure>
+
+<figure style="text-align: center;">
+  <img src="echec.png" alt="echec" style="width:100%; max-width:400px;">
+  <figcaption>Une nouvelle épreuve inspiré de la cellule interactive (2011 jusqu'à 2013) et du jeu du Chemin (2011 jusqu'à 2013).
+
+Le candidat va devoir retenir le chemin illuminé au sol pour pouvoir arriver jusqu'au roi et obtenir la clé 🔑.</figcaption>
+</figure>
+
+<figure style="text-align: center;">
+  <img src="sdm.png" alt="sdm" style="width:100%; max-width:400px;">
+  <figcaption>Une nouvelle épreuve est une adaptation des cylindres (1993 jusqu'à 2017) , Le candidat va devoir progresser à travers la colonne d'engrenages pour pouvoir arriver au bout et obtenir la clé 🔑.</figcaption>
+</figure>
+
+<figure style="text-align: center;">
+  <img src="morpion.png" alt="morpion" style="width:100%; max-width:400px;">
+  <figcaption>Une nouvelle épreuve est une adaptation de l'épreuves des perches (2005 jusqu'à 2014) ,La seule épreuve du fort à ce jouer à trois candidats , il faut trouver les 3 cases qui s'allument sur le damier au plafond et y rester simultanément avec les trois candidats pendant 3 secondes. Une fois ceci effectuer ils obtiennent la clé 🔑.</figcaption>
+</figure>
   </div>
+</div>
 
   <div id="presentation" class="tab-content">
-    <h2>Présentation</h2>
-    <p>FBM est un projet Fort Boyard en Minecraft Vanilla, accessible sans mods !</p>
+    <h2>Présentation de FBM</h2>
+    <section>
+      <h3>Bonjour à tous et à toutes</h3>
+      <p>et bienvenue sur le site du Projet Fort Boyard Minecraft Vanilla ! Un Serveur dédié à des émissions Fort Boyard sur minecraft sans mods pour offrir une expérience de jeu optimal et accessible à tout les joueurs. Un fort Boyard Amélioré Chaque Année et des techniques uniques adapté au serveur Vanilla , mais aussi une passion transmise dans sa construction mais aussi dans les tournages avec les différents joueurs !</p>
+      <h3>Tentez L'aventure Fort Boyard Minecraft Dès Maintenant ! </h3>
+    </section>
   </div>
 
   <div id="equipe" class="tab-content">
     <h2>L'équipe</h2>
     <div class="team-member">
-      <img src="ppGlooper.jpg" alt="Glooper">
-      <p>Glooper99 - Fondateur</p>
+      <img src="ppGlooper.jpg" alt="fondateur">
+      <div>
+        <strong>Glooper99</strong><br/>
+        fondateur du projet
+      </div>
     </div>
     <div class="team-member">
-      <img src="ppNatyan.jpeg" alt="Natyan">
-      <p>Natyan - Co-fondateur</p>
+      <img src="ppNatyan.jpeg" alt="co-fondateur">
+      <div>
+        <strong>Natyan</strong><br/>
+        Co-Fondateur et STAFF
+      </div>
+    </div>
+    <div class="team-member">
+      <img src="pp3.jpg" alt="fondateur">
+      <div>
+        <strong>Arkkey</strong><br/>
+        Encadrement et STAFF
     </div>
   </div>
+</div>
 
   <div id="manifestations" class="tab-content">
-    <h2>Événements</h2>
-    <p><strong>19 juillet 2025 :</strong> Tournage</p>
-    <p><strong>22 juillet 2025 :</strong> Live</p>
+    <h2>Calendrier des manifestations</h2>
+    <div class="event">
+      <strong>19 juillet 2025 :</strong> Tournage
+    </div>
+    <div class="event">
+      <strong>22 juillet 2025 :</strong> live
+    </div>
   </div>
-
-  <footer>
-    &copy; 2025 Fort Boyard Minecraft
-  </footer>
 
   <script>
     function showTab(id) {
@@ -205,6 +252,9 @@
       document.getElementById(id).classList.add('active');
     }
   </script>
+
+  </script>
 </body>
 </html>
 
+Copyright © FBM / fortboyardminecraft /
