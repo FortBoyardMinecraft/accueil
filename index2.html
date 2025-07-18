@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FBM - Mobile</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: url('fond.png') no-repeat center center;
+      background-size: cover;
+      color: white;
+    }
+
+    .intro {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('fond.png') no-repeat center center;
+      background-size: cover;
+      animation: fadeOut 1s ease-in-out 3s forwards;
+    }
+
+    .intro img {
+      width: 80vw;
+      height: auto;
+      animation: scaleIn 2s ease-out;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(1.1);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.8);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    header img {
+      height: 40px;
+    }
+
+    header h1 {
+      font-size: 1.2rem;
+    }
+
+    nav {
+      background: gray;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav a {
+      padding: 1rem;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      width: 100%;
+      text-align: center;
+      border-bottom: 1px solid #444;
+    }
+
+    nav a:hover {
+      background: black;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .grid-images {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .grid-images img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    figcaption {
+      font-size: 0.85rem;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .team-member {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: gray;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .team-member img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: white;
+      background: #111;
+    }
+  </style>
+</head>
+<body>
+  <div class="intro">
+    <img src="logo2.png" alt="Logo FBM">
+  </div>
+
+  <header>
+    <img src="logo2.png" alt="Logo">
+    <h1>FBM - Mobile</h1>
+  </header>
+
+  <nav>
+    <a href="#" onclick="showTab('accueil')">Accueil</a>
+    <a href="#" onclick="showTab('presentation')">Présentation</a>
+    <a href="#" onclick="showTab('equipe')">L'équipe</a>
+    <a href="#" onclick="showTab('manifestations')">Événements</a>
+  </nav>
+
+  <div id="accueil" class="tab-content active">
+    <h2>Bienvenue</h2>
+    <div class="grid-images">
+      <figure>
+        <img src="fort1.png" alt="fort1">
+        <figcaption>Vue du dessus</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div id="presentation" class="tab-content">
+    <h2>Présentation</h2>
+    <p>FBM est un projet Fort Boyard en Minecraft Vanilla, accessible sans mods !</p>
+  </div>
+
+  <div id="equipe" class="tab-content">
+    <h2>L'équipe</h2>
+    <div class="team-member">
+      <img src="ppGlooper.jpg" alt="Glooper">
+      <p>Glooper99 - Fondateur</p>
+    </div>
+    <div class="team-member">
+      <img src="ppNatyan.jpeg" alt="Natyan">
+      <p>Natyan - Co-fondateur</p>
+    </div>
+  </div>
+
+  <div id="manifestations" class="tab-content">
+    <h2>Événements</h2>
+    <p><strong>19 juillet 2025 :</strong> Tournage</p>
+    <p><strong>22 juillet 2025 :</strong> Live</p>
+  </div>
+
+  <footer>
+    &copy; 2025 Fort Boyard Minecraft
+  </footer>
+
+  <script>
+    function showTab(id) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>
+
