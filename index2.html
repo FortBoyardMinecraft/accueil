@@ -208,6 +208,7 @@
 <nav class="navbar">
   <button class="nav-link active" data-target="accueil">Accueil</button>
   <button class="nav-link" data-target="presentation">Présentation</button>
+  <a href="#" onclick="showTab('participation')">Participation</a>
   <button class="nav-link" data-target="equipe">L'équipe</button>
   <button class="nav-link" data-target="manifestations">Manifestations</button>
   <a href="contact2.html">Contact</a>
@@ -246,6 +247,30 @@ Le candidat va devoir retenir le chemin illuminé au sol pour pouvoir arriver ju
   <figcaption>Une nouvelle épreuve est une adaptation de l'épreuves des perches (2005 jusqu'à 2014) ,La seule épreuve du fort à ce jouer à trois candidats , il faut trouver les 3 cases qui s'allument sur le damier au plafond et y rester simultanément avec les trois candidats pendant 3 secondes. Une fois ceci effectuer ils obtiennent la clé 🔑.</figcaption>
 </figure>
   </div>
+</div>
+
+  <div id="participation" class="tab-content">
+   <style>
+.video-button {
+  display: inline-block;
+  background-color: #e74c3c;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  margin-top: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.video-button:hover {
+  background-color: #c0392b;
+}
+</style>
+
+  <h2>Participations</h2>
+  <div id="participation-list" class="participation-container"></div>
 </div>
 
   <div id="presentation" class="tab-content">
@@ -329,6 +354,33 @@ Le candidat va devoir retenir le chemin illuminé au sol pour pouvoir arriver ju
   });
 });
 
+    fetch("participations.json")
+  .then(response => response.json())
+  .then(data => {
+    const container = document.getElementById("participation-list");
+    if (!container) return;
+
+    data.forEach(entry => {
+      const card = document.createElement("div");
+      card.className = "participation-card";
+
+      const details = document.createElement("div");
+      details.className = "participation-details";
+
+      details.innerHTML = `
+        <strong>${entry.date} — Équipe : ${entry.equipe}</strong>
+        <div>Participants : ${entry.participants.join(", ")}</div>
+        <div>Argent récolté : ${entry.argent} Boyards</div>
+        <a href="${entry.video}" target="_blank" class="video-button">Voir la vidéo</a>
+      `;
+
+      card.appendChild(details);
+      container.appendChild(card);
+    });
+  })
+  .catch(error => {
+    console.error("Erreur lors du chargement des participations :", error);
+  });
   </script>
 </body>
 </html>
