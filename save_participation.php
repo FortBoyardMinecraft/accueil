@@ -1,28 +1,20 @@
 <?php
-// Autoriser le CORS si nécessaire
-header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
-// Lire la requête JSON
-$data = json_decode(file_get_contents('php://input'), true);
+try {
+    $data = json_decode(file_get_contents('php://input'), true);
+    if (!$data) throw new Exception("Données invalides");
 
-if (!$data) {
-    echo json_encode(['success' => false, 'message' => 'Données invalides']);
-    exit;
-}
+    $file = 'participations.json';
+    $participations = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
 
-$file = 'participations.json';
-$participations = [];
+    $participations[] = $data;
 
-if (file_exists($file)) {
-    $participations = json_decode(file_get_contents($file), true);
-}
+    if (file_put_contents($file, json_encode($participations, JSON_PRETTY_PRINT)) === false) {
+        throw new Exception("Erreur d'écriture");
+    }
 
-$participations[] = $data;
-
-if (file_put_contents($file, json_encode($participations, JSON_PRETTY_PRINT))) {
     echo json_encode(['success' => true]);
-} else {
-    echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'écriture']);
+} catch (Exception $e) {
+    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 }
-
