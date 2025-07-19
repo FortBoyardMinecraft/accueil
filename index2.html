@@ -318,6 +318,35 @@ Le candidat va devoir retenir le chemin illuminé au sol pour pouvoir arriver ju
   </div>
 
   <script>
+
+     fetch("participations.json")
+  .then(response => response.json())
+  .then(data => {
+    const container = document.getElementById("participation-list");
+    if (!container) return;
+
+    data.forEach(entry => {
+      const card = document.createElement("div");
+      card.className = "participation-card";
+
+      const details = document.createElement("div");
+      details.className = "participation-details";
+
+      details.innerHTML = `
+        <strong>${entry.date} — Équipe : ${entry.equipe}</strong>
+        <div>Participants : ${entry.participants.join(", ")}</div>
+        <div>Argent récolté : ${entry.argent} Boyards</div>
+        <a href="${entry.video}" target="_blank" class="video-button">Voir la vidéo</a>
+      `;
+
+      card.appendChild(details);
+      container.appendChild(card);
+    });
+  })
+  .catch(error => {
+    console.error("Erreur lors du chargement des participations :", error);
+  });
+    
     function showTab(id) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.getElementById(id).classList.add('active');
@@ -353,34 +382,6 @@ Le candidat va devoir retenir le chemin illuminé au sol pour pouvoir arriver ju
     link.classList.add('active');
   });
 });
-
-    fetch("participations.json")
-  .then(response => response.json())
-  .then(data => {
-    const container = document.getElementById("participation-list");
-    if (!container) return;
-
-    data.forEach(entry => {
-      const card = document.createElement("div");
-      card.className = "participation-card";
-
-      const details = document.createElement("div");
-      details.className = "participation-details";
-
-      details.innerHTML = `
-        <strong>${entry.date} — Équipe : ${entry.equipe}</strong>
-        <div>Participants : ${entry.participants.join(", ")}</div>
-        <div>Argent récolté : ${entry.argent} Boyards</div>
-        <a href="${entry.video}" target="_blank" class="video-button">Voir la vidéo</a>
-      `;
-
-      card.appendChild(details);
-      container.appendChild(card);
-    });
-  })
-  .catch(error => {
-    console.error("Erreur lors du chargement des participations :", error);
-  });
   </script>
 </body>
 </html>
