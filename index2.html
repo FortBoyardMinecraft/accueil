@@ -34,6 +34,10 @@
       animation: scaleIn 2s ease-out;
     }
 
+    .intro.hidden {
+  display: none !important;
+    }
+
     @keyframes fadeOut {
       to {
         opacity: 0;
@@ -192,6 +196,9 @@
   </style>
 </head>
 <body>
+  <div id="loader">LOGO</div>
+
+<div id="main-content" style="display: none;">
   <div class="intro">
     <img src="logo2.png" alt="Logo FBM">
   </div>
@@ -318,6 +325,27 @@ Le candidat va devoir retenir le chemin illuminé au sol pour pouvoir arriver ju
   </div>
 
   <script>
+    window.addEventListener('load', function () {
+  const loader = document.getElementById('loader');
+  const mainContent = document.getElementById('main-content');
+  const intro = document.querySelector('.intro');
+
+  loader.style.display = 'none';
+  mainContent.style.display = 'block';
+
+  // Attend la fin de l'animation intro, puis cache complètement l’élément
+  setTimeout(() => {
+    intro.classList.add('hidden');
+
+    // Force le scroll en haut (mobile inclus)
+    window.scrollTo({ top: 0, behavior: 'auto' });
+
+    // Double sécurité pour vieux navigateurs
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }, 50);
+  }, 3100); // L'animation fadeOut dure 3s => on attend un peu plus
+});
 
      fetch("participations.json")
   .then(response => response.json())
