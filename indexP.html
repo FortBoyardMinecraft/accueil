@@ -387,6 +387,42 @@ footer {
       color: #666;
       font-size: 0.9rem;
     }
+  .participation-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.participation-card {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #f4f4f4;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.participation-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.participation-details strong {
+  font-size: 1.2em;
+  margin-bottom: 0.5rem;
+}
+
+.participation-details a {
+  margin-top: 0.5rem;
+  color: #007bff;
+  text-decoration: none;
+}
+.participation-details a:hover {
+  text-decoration: underline;
+  }
 }
 
   </style>
@@ -507,31 +543,11 @@ Le candidat va devoir retenir le chemin illuminé au sol pour pouvoir arriver ju
       <h3>Tentez L'aventure Fort Boyard Minecraft Dès Maintenant ! </h3>
     </section>
   </div>
-
-  <section id="participations-list"></section>
-
-<script>
-fetch("participations.json")
-  .then(res => res.json())
-  .then(data => {
-    const list = document.getElementById("participations-list");
-    data.forEach(p => {
-      const el = document.createElement("details");
-      el.innerHTML = `
-        <summary><strong>${p.date}</strong> — ${p.equipe}</summary>
-        <p><strong>Participants :</strong> ${p.participants.join(", ")}</p>
-        <p><strong>Argent récolté :</strong> ${p.argent} 💰</p>
-        <p><a href="${p.video}" target="_blank">Voir la vidéo 📺</a></p>
-      `;
-      list.appendChild(el);
-    });
-  })
-  .catch(err => {
-    document.getElementById("participations-list").innerHTML =
-      "<p>Impossible de charger les participations.</p>";
-    console.error(err);
-  });
-</script>
+  
+ <div id="participation" class="tab-content">
+  <h2>Participations</h2>
+  <div id="participation-list" class="participation-container"></div>
+</div>
 
   <div id="equipe" class="tab-content">
     <h2>L'équipe</h2>
@@ -581,6 +597,34 @@ fetch("participations.json")
         document.getElementById('main-header').classList.add('visible');
       }, 100);
     });
+
+    fetch("participations.json")
+  .then(response => response.json())
+  .then(data => {
+    const container = document.getElementById("participation-list");
+    if (!container) return;
+
+    data.forEach(entry => {
+      const card = document.createElement("div");
+      card.className = "participation-card";
+
+      const details = document.createElement("div");
+      details.className = "participation-details";
+
+      details.innerHTML = `
+        <strong>${entry.date} — Équipe : ${entry.equipe}</strong>
+        <div>Participants : ${entry.participants.join(", ")}</div>
+        <div>Argent récolté : ${entry.argent} Boyards</div>
+        <a href="${entry.video}" target="_blank">📺 Voir la vidéo</a>
+      `;
+
+      card.appendChild(details);
+      container.appendChild(card);
+    });
+  })
+  .catch(error => {
+    console.error("Erreur lors du chargement des participations :", error);
+  });
   </script>
 </body>
 </html>
